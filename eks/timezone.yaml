@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tz-configmap
+  namespace: default
+  annotations:
+    eks.tke.cloud.tencent.com/cpu: "1"
+    eks.tke.cloud.tencent.com/mem: 2Gi
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: busy-box-test
+    env:
+    - name: TZ
+      value: Asia/Shanghai
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ["sleep", "60000"]
+    volumeMounts:
+    - name: timezone
+      mountPath: /etc/localtimeX
+      subPath: Shanghai
+  volumes:
+  - configMap:
+      name: timezone-configmap
+      items:
+      - key: Shanghai
+        path: Shanghai
+    name: timezone
