@@ -7,7 +7,7 @@ class ZhihuxjjSpider(Spider):
     name='zhihuxjj'
     allowed_domains = ["www.zhihu.com"]
     start_urls = ["https://www.zhihu.com/"]
-    start_user = "jixin"
+    start_user = "gonggeer"
     followees_url = 'https://www.zhihu.com/api/v4/members/{user}/followees?include=data[*].answer_count,articles_count,gender,follower_count,is_followed,is_following,badge[?(type=best_answerer)].topics&offset={offset}&limit=20'
     user_url = 'https://www.zhihu.com/api/v4/members/{user}?include={include}'
     user_include = 'locations'
