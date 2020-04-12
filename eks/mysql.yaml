@@ -36,12 +36,22 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: data
+        - mountPath: /etc/localtime
+          name: timezone-configmap
+          subPath: Shanghai
       dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: qcloudregistrykey
       restartPolicy: Always
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: timezone-configmap
+        configMap:
+          name: timezone-configmap
+          items:
+            - key: Shanghai
+              path: Shanghai
   volumeClaimTemplates:
   - metadata:
       name: data
@@ -52,4 +62,3 @@ spec:
         requests:
           storage: 50Gi
       storageClassName: cbs
-

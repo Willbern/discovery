@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zhihu-discovery
+spec:
+  template:
+    metadata:
+      annotations:
+        eks.tke.cloud.tencent.com/cpu: "1"
+        eks.tke.cloud.tencent.com/mem: 2Gi
+    spec:
+      containers:
+      - name: discovery
+        image: ccr.ccs.tencentyun.com/caryguo/discovery:0.5
+      restartPolicy: Never
+  backoffLimit: 4
